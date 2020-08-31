@@ -2,6 +2,14 @@ import React,{useState} from 'react';
 import './App.css';
 import QuestionCard from './components/QuestionCard';
 import {fetchQuizQuestions} from './components/API'
+import {QuestionState} from './components/API';
+
+type AnswerObject={
+  question:string;
+  answer:string;
+  correct:boolean;
+  correctAnswer:string;
+}
 
 const TOTAL_QUESTIONS=10;
 
@@ -10,16 +18,27 @@ function App() {
   const [loading,setLoading]=useState(false);
   const [questions,setQuestions]=useState([]);
   const [number,setNumber]=useState(0);
-  const [userAnswers,setUserAnswers]=useState([]);
+  const [userAnswers,setUserAnswers]=useState<AnswerObject[]>([]);
   const [score,setScore]=useState(0);
   const [gameOver,setGameOver]=useState(true);
 
-  console.log(fetchQuizQuestions(10));
   
 
 
   const startQuiz=async()=>{
+    setLoading(true);
+    setGameOver(false);
     
+    const newQuestions=await fetchQuizQuestions(TOTAL_QUESTIONS);
+
+    console.log(newQuestions);
+    
+    setQuestions(newQuestions);
+    setScore(0);
+    setUserAnswers([]);
+    setNumber(0);
+    setLoading(false);
+
   }
 
   const checkAnswer=(e:React.MouseEvent<HTMLButtonElement>)=>{
