@@ -42,7 +42,22 @@ function App() {
   }
 
   const checkAnswer=(e:React.MouseEvent<HTMLButtonElement>)=>{
-    
+    if(!gameOver){
+      const answer=e.currentTarget.value;
+      //Check answer against correct
+      const correct=questions[number].correct_answer===answer;
+
+      if(correct) setScore(score+1);
+      
+      const answerObject={
+        question:questions[number].question,
+        answer,
+        correct,
+        correctAnswer:questions[number].correct_answer
+      }
+      setUserAnswers(prev=>[...prev,answerObject]);
+
+    }
   }
 
   const nextQuestion=()=>{
@@ -57,7 +72,7 @@ function App() {
       ):null}
       
       
-      {!gameOver?<p className='score'>Score: </p>:null}
+      {!gameOver?<p className='score'>Score:{score} </p>:null}
       {loading&&<p>Loading Questions...</p>}
       {!loading&&!gameOver&&( 
       <QuestionCard 
