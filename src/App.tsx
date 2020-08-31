@@ -30,7 +30,7 @@ function App() {
     setGameOver(false);
     
     const newQuestions=await fetchQuizQuestions(TOTAL_QUESTIONS);
-
+    
     console.log(newQuestions);
     
     setQuestions(newQuestions);
@@ -52,9 +52,13 @@ function App() {
   return (
     <div>
       <h1>React Quiz</h1>
-      <button className='startBtn' onClick={startQuiz}>Start Quiz</button>
-      <p className='score'>Score: </p>
-      <p>Loading Questions...</p>
+      {gameOver||userAnswers.length===TOTAL_QUESTIONS?(
+        <button className='startBtn' onClick={startQuiz}>Start Quiz</button>
+      ):null}
+      
+      
+      {!gameOver?<p className='score'>Score: </p>:null}
+      {loading&&<p>Loading Questions...</p>}
       {/* <QuestionCard 
         questionNumber={number+1}
         totalQuestions={TOTAL_QUESTIONS}
