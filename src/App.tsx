@@ -3,6 +3,9 @@ import './App.css';
 import QuestionCard from './components/QuestionCard';
 import {fetchQuizQuestions} from './components/API'
 import {QuestionState} from './components/API';
+import { GlobalStyle,Wrapper } from './App.styles';
+
+
 
 export type AnswerObject={
   question:string;
@@ -72,10 +75,12 @@ function App() {
   }
 
   return (
-    <div>
+    <>
+    <GlobalStyle />
+    <Wrapper>
       <h1>React Quiz</h1>
       {gameOver||userAnswers.length===TOTAL_QUESTIONS?(
-        <button className='startBtn' onClick={startQuiz}>Start Quiz</button>
+        <button className='start' onClick={startQuiz}>Start Quiz</button>
       ):null}
       
       
@@ -92,10 +97,11 @@ function App() {
       />)
     }
     {!gameOver&&!loading&&userAnswers.length===number+1&&number!==TOTAL_QUESTIONS-1?(
-      <button className='nextBtn' onClick={nextQuestion}>Next Question</button>
+      <button className='next' onClick={nextQuestion}>Next Question</button>
     ):null}
       
-    </div>
+    </Wrapper>
+    </>
   );
 }
 
