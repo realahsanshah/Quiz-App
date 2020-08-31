@@ -1,6 +1,7 @@
 import React,{useState} from 'react';
 import './App.css';
 import QuestionCard from './components/QuestionCard';
+import {fetchQuizQuestions} from './components/API'
 
 const TOTAL_QUESTIONS=10;
 
@@ -13,9 +14,12 @@ function App() {
   const [score,setScore]=useState(0);
   const [gameOver,setGameOver]=useState(true);
 
+  console.log(fetchQuizQuestions(10));
+  
+
 
   const startQuiz=async()=>{
-
+    
   }
 
   const checkAnswer=(e:React.MouseEvent<HTMLButtonElement>)=>{
@@ -32,14 +36,14 @@ function App() {
       <button className='startBtn' onClick={startQuiz}>Start Quiz</button>
       <p className='score'>Score: </p>
       <p>Loading Questions...</p>
-      <QuestionCard 
+      {/* <QuestionCard 
         questionNumber={number+1}
         totalQuestions={TOTAL_QUESTIONS}
         question={questions[number].question}
         answers={questions[number].answers}
         userAnswer={userAnswers?userAnswers[number]:undefined}
         callback={checkAnswer}
-      />
+      /> */}
       <button className='nextBtn' onClick={nextQuestion}>Next Question</button>
     </div>
   );
