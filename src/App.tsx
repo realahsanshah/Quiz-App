@@ -4,7 +4,7 @@ import QuestionCard from './components/QuestionCard';
 import {fetchQuizQuestions} from './components/API'
 import {QuestionState} from './components/API';
 
-type AnswerObject={
+export type AnswerObject={
   question:string;
   answer:string;
   correct:boolean;
